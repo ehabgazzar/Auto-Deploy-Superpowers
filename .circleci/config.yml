@@ -86,6 +86,7 @@ jobs:
             npm i
             npm run test
       - slack/notify:
+          channel: general
           event: fail
           template: basic_fail_1
   test-backend:
@@ -102,6 +103,7 @@ jobs:
             cd frontend
             npm run build
       - slack/notify:
+          channel: general
           event: fail
           template: basic_fail_1   
   scan-frontend:
@@ -166,10 +168,9 @@ workflows:
       - build-backend
       - test-frontend:
           requires: [build-frontend]
-          context: slack-secrets
       - test-backend:
           requires: [build-backend]
-          context: slack-secrets
+
       - scan-backend:
           requires: [build-backend]
       - scan-frontend:
