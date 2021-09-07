@@ -85,7 +85,9 @@ jobs:
             cd frontend
             npm i
             npm run test
-      - slack/status 
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
   test-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -99,7 +101,9 @@ jobs:
           command: |
             cd frontend
             npm run build
-      - slack/status    
+      - slack/notify:
+          event: fail
+          template: basic_fail_1   
   scan-frontend:
     docker:
       - image: circleci/node:13.8.0
