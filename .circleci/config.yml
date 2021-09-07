@@ -85,6 +85,7 @@ jobs:
             cd frontend
             npm i
             npm run test
+      - slack/status 
   test-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -96,8 +97,9 @@ jobs:
       - run:
           name: Run Backend Test
           command: |
-            cd backend
-            npm run test        
+            cd frontend
+            npm run build
+      - slack/status    
   scan-frontend:
     docker:
       - image: circleci/node:13.8.0
